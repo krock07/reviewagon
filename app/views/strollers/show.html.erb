@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @stroller.name %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @stroller.slug %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @stroller.image_url %>
+</p>
+
+<%= link_to 'Edit', edit_stroller_path(@stroller) %> |
+<%= link_to 'Back', strollers_path %>

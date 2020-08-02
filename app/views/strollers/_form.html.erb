@@ -1,0 +1,32 @@
+<%= form_with(model: stroller, local: true) do |form| %>
+  <% if stroller.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(stroller.errors.count, "error") %> prohibited this stroller from being saved:</h2>
+
+      <ul>
+        <% stroller.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :slug %>
+    <%= form.text_field :slug %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
