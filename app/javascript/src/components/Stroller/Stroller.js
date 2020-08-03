@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
-import Header from './Header';
+// import Header from './Header';
 import Review from './Review';
 import Form from './Form';
 import GetNested from '../../Helpers/GetNested'
@@ -9,6 +9,12 @@ import GetNested from '../../Helpers/GetNested'
 const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
+`
+
+const Header = styled.div`
+  padding: 100px 100px 10px 100px;
+  font-size: 30px;
+  text-align: center;
 `
 
 const Column = styled.div`
@@ -36,22 +42,30 @@ const Main = styled.div`
 const Stroller = (props) => {
     const [stroller, setStroller] = useState({})
     const [review, setReview] = useState({})
+    const [load, setLoad] = React.useState(false);
     const [error, setError] = useState('')
 
     useEffect(()=> {
         const slug = props.match.params.slug
-        const url = `api/v1/strollers/${slug}`
+        // const url = `api/v1/strollers/${slug}.json`
 
-        axios.get(url)
-       
-    .then( (resp) => setStroller(resp.data.data.stroller))
-    .catch( resp => console.log(resp) )
-  }, [])
+        axios.get(`http://localhost:3000/api/v1/strollers/${slug}.json`)
+        .then((response) => response.data)
+        .then( resp => {console.log(resp)
+          return resp
+        })
+        .then ( resp => {setStrollers(resp.data)
+          setLoad(true);})
+          .catch( err => {
+            setError(err.message);
+                      setLoad(true)
+          })
+         } , [])
 
   const handleChange = (event) => {
     event.preventDefault()
 
-    setReview(Object.assign({}, review,{[event.target.name]: event.target.value}))
+    setReview(Object.assign({}, review, {[event.target.name]: event.target.value}))
     // console.log("name:", event.target.name, "value:", event.target.value)
     console.log("review:", review)
   }
@@ -66,7 +80,7 @@ const Stroller = (props) => {
   
 
     const strollerId = parseInt(stroller.id)
-    axios.post('api/v1/reviews', {review, strollerId})
+    axios.post('api/v1/reviews.json', {review, strollerId})
     .then(resp => {
         const reviews = [ ...stroller.reviews, resp.data ]
         setStroller({ ...stroller, reviews })
@@ -113,12 +127,12 @@ const setRating  = (score, event) => {
         <Wrapper>
             <Column>
             <Main>
-                <Header
+                <Header>
                 image_url={image_url}
                 name={name}
                 reviews={stroller.reviews}
                 average={average}
-                />
+                </Header>
                  {strollerReviews}
             </Main>
             </Column>

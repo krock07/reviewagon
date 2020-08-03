@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { Route, Link } from 'react-router-dom'
-// import { AuthConsumer } from './AuthContext'
+import { AuthConsumer } from './AuthContext'
 
 const Wrapper = styled.nav`
   width: 100%;
@@ -35,6 +35,7 @@ const Right = styled.div`
   flex-basis: 12%;
   align-self: flex-end !important;
   margin-right: 24px;
+
   a {
     color: #fff;
     text-decoration: none;
@@ -55,6 +56,7 @@ const Logo = styled.span`
   font-family: 'Poppins-ExtraBold';
   font-weight: bold;
   font-size: 20px;
+
   a {
     font-size: inherit;
     font-weight: inherit;
@@ -63,24 +65,11 @@ const Logo = styled.span`
     text-decoration: none;
   }
 `
-const logout = (e) => {
-    e.preventDefault()
-
-    AxiosHelper()
-    axios.delete('/api/v1/auth/logout')
-    .then( _resp => {
-      this.setState({ isAuth: false })
-      window.location.href = '/'
-    })
-    .catch( err => console.log(err))
-  }
 
 const Navbar = (props) => {
-
   return (
-    
-       
-      
+    <AuthConsumer>
+      { ({ isAuth, logout }) => (
         <Wrapper>
           <Container>
             <Nav>
@@ -89,21 +78,24 @@ const Navbar = (props) => {
               </Left>
               <Right>
                 <Menu>
-                    
+                    { 
+                    isAuth ? 
                     <Fragment>
                       <li><Link to="/">Home</Link></li>
                       <li><a onClick={logout}>Log Out</a></li>
                     </Fragment> :
-                    {/* <Fragment>
+                    <Fragment>
                       <li><Link to="/login">Login</Link></li>
                       <li><Link to="/register">Signup</Link></li>
-                    </Fragment> */}
-                
+                    </Fragment>
+                  }
                 </Menu>
               </Right>
             </Nav>  
           </Container>
         </Wrapper>
+      )}
+    </AuthConsumer>
   )
 }
 
