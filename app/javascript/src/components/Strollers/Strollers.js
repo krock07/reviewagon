@@ -68,9 +68,9 @@ const Strollers = () => {
       <Stroller 
         key={index}
         name={item.attributes.name}
-        image_url={item.attributes.imageUrl}
+        image_url={item.attributes.image_url}
         slug={item.attributes.slug}
-        average_score={item.attributes.averageScore}
+        avg_score={item.attributes.avg_score}
       />
     )
   })

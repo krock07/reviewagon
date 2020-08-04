@@ -54,7 +54,7 @@ const LinkWrapper = styled.div`
 const Stroller = (props) => {
   // const { image_url, slug, average_score} = props.attributes
  
-    const average_score = parseFloat(props.average_score / 100)
+    // const avg_score = parseFloat(props.avg_score / 100)
 
   return (
     <Card>
@@ -64,7 +64,7 @@ const Stroller = (props) => {
       <StrollerName>
         {props.name}
       </StrollerName>
-      <Rating score={average_score}/>
+      <Rating score={props.avg_score}/>
       <LinkWrapper>
         <Link to={"/strollers/" + props.slug}>View Stroller</Link>
       </LinkWrapper>

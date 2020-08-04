@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
-// import Header from './Header';
+import Header from './Header';
 import Review from './Review';
 import Form from './Form';
-import GetNested from '../../Helpers/GetNested'
+// import GetNested from '../../Helpers/GetNested'
 
 const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
 `
 
-const Header = styled.div`
-  padding: 100px 100px 10px 100px;
-  font-size: 30px;
-  text-align: center;
-`
+
 
 const Column = styled.div`
   background: #fff; 
@@ -42,31 +38,33 @@ const Main = styled.div`
 const Stroller = (props) => {
     const [stroller, setStroller] = useState({})
     const [review, setReview] = useState({})
-    const [load, setLoad] = React.useState(false);
-    const [error, setError] = useState('')
+    const [loaded, setLoaded] = React.useState(false);
+    // const [error, setError] = useState('')
 
     useEffect(()=> {
         const slug = props.match.params.slug
         // const url = `api/v1/strollers/${slug}.json`
 
         axios.get(`http://localhost:3000/api/v1/strollers/${slug}.json`)
-        .then((response) => response.data)
-        .then( resp => {console.log(resp)
-          return resp
-        })
-        .then ( resp => {setStrollers(resp.data)
-          setLoad(true);})
-          .catch( err => {
-            setError(err.message);
-                      setLoad(true)
-          })
+        .then(response => {
+          setStroller(response.data)
+          setLoaded(true)
+        } )
+        .catch( resp => console.log(resp) )
+         
+        // .then ( resp => {setStroller(resp.data)
+        //   setLoad(true);})
+        //   .catch( err => {
+        //     setError(err.message);
+        //               setLoaded(true)
+        //   })
          } , [])
 
   const handleChange = (event) => {
     event.preventDefault()
 
     setReview(Object.assign({}, review, {[event.target.name]: event.target.value}))
-    // console.log("name:", event.target.name, "value:", event.target.value)
+    console.log("name:", event.target.name, "value:", event.target.value)
     console.log("review:", review)
   }
 
@@ -75,15 +73,19 @@ const Stroller = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
+// update default headers
     const csrfToken = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
   
 
-    const strollerId = parseInt(stroller.id)
-    axios.post('api/v1/reviews.json', {review, strollerId})
+    const stroller_id = stroller.data.id
+    axios.post('http://localhost:3000/api/v1/reviews.json', {review, stroller_id})
     .then(resp => {
-        const reviews = [ ...stroller.reviews, resp.data ]
-        setStroller({ ...stroller, reviews })
+      // debugger
+      
+        const included = [ ...stroller.included, resp.data.data ]
+        setStroller({ ...stroller, included })
+        console.log(included)
         setReview({title: '', description: '', score: 0})
         setError('')
     })
@@ -94,28 +96,46 @@ const Stroller = (props) => {
 
 const setRating  = (score, event) => {
     event.preventDefault()
+    // debugger
 
     setReview({...review, score})
 
   }
 
-  const name = GetNested(stroller, 'name')
-  const image_url = GetNested(stroller, 'imageUrl')
+  // const name = GetNested(stroller, 'name')
+  // const image_url = GetNested(stroller, 'imageUrl')
 
 
-  let total, average = 0
-  let strollerReviews
+  // let total, average = 0
+  // let strollerReviews
 
-  if (stroller.reviews && stroller.reviews.length > 0) {
-  total = strollers.reviews.reduce( (total, review) => total + review.score, 0)
-  average = total > 0 ? (parseFloat(total) / parseFloat(stroller.reviews.length)) : 0
+  // if (stroller.reviews && stroller.reviews.length > 0) {
+  // total = strollers.reviews.reduce( (total, review) => total + review.score, 0)
+  // average = total > 0 ? (parseFloat(total) / parseFloat(stroller.reviews.length)) : 0
 
-  strollerReviews = stroller.reviews.map( (review, index) => {
+  // strollerReviews = stroller.reviews.map( (review, index) => {
+  //     return (
+  //       <Review 
+  //         key={index} 
+  //         id={review.id} 
+  //         attributes={review}
+  //       />
+  //     )
+  //   })
+  // }
+// let strollers
+  let reviews
+  if (loaded && stroller.included) {
+    reviews = stroller.included.map( (review, index) => {
+      console.log(review)
+      
       return (
         <Review 
           key={index} 
-          id={review.id} 
-          attributes={review}
+          attributes={review.attributes}
+          // title={review.attributes.title} 
+          // description={review.attributes.description} 
+          // score={review.attributes.score} 
         />
       )
     })
@@ -123,30 +143,64 @@ const setRating  = (score, event) => {
 
 
     return (
+    <Wrapper>
      
-        <Wrapper>
-            <Column>
-            <Main>
-                <Header>
-                image_url={image_url}
-                name={name}
-                reviews={stroller.reviews}
-                average={average}
-                </Header>
-                 {strollerReviews}
-            </Main>
-            </Column>
-            <Column>
-            <Form
-            name={name}
-            review={review}
-            handleChange = {handleChange}
-            handleSubmit={handleSubmit}
-            setRating={setRating}
-            error={error}
-          />
-            </Column>
-        </Wrapper>
+        { loaded &&
+        <Fragment>
+         <Column>
+         <Main>
+        <Header
+        attributes= {stroller.data.attributes}
+        reviews={stroller.included}
+        />
+      
+        {reviews}
+      </Main>
+      </Column>
+      <Column>
+        <Form
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        setRating={setRating}
+        attributes={stroller.data.attributes}
+        review={review}
+
+        />
+      </Column>
+      </Fragment>
+        }
+    </Wrapper>
+     
+        // <Wrapper>
+        //   {
+        //     loaded &&
+        //     <Fragment>
+        //     <Column>
+        //     <Main>
+        //         <Header
+        //         attributes={stroller.data.attributes}
+        //         reviews={stroller.included}
+        //         image_url={image_url}
+        //         name={name}
+        //         reviews={stroller.reviews}
+        //         average={average}
+        //         />
+        //          {reviews}
+        //     </Main>
+        //     </Column>
+        //     <Column>
+        //     <Form
+        //     name={name}
+        //     review={review}
+        //     handleChange = {handleChange}
+        //     handleSubmit={handleSubmit}
+        //     setRating={setRating}
+        //     error={error}
+        //   />
+        //     </Column>
+        //     </Fragment>
+        //   }
+        // </Wrapper>
     );
 };
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_31_184456) do
+ActiveRecord::Schema.define(version: 2020_08_04_012032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(version: 2020_07_31_184456) do
     t.bigint "stroller_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["stroller_id"], name: "index_reviews_on_stroller_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "strollers", force: :cascade do |t|
@@ -33,5 +35,13 @@ ActiveRecord::Schema.define(version: 2020_07_31_184456) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "reviews", "strollers"
+  add_foreign_key "reviews", "users"
 end

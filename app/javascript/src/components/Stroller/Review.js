@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import Rating from '../Rating/Rating'
 
 const Card = styled.div`
   border-radius: 4px;
   border: 1px solid #E6E6E6;
   padding: 20px;
-  margin: 0px 0px 20px 0px;
+  margin: 0px 20px 20px 0px;
 `
 
 const Title = styled.div`
@@ -17,18 +18,27 @@ const Description = styled.div`
   padding: 0 0 20px 0;
 `
 
+const Container =styled.div`
+  display: flex;
+  flex-direction: row:
+`
+
 const Review = (props) => {
+  const {score, description, title} = props.attributes
   return (
     <Card>
+      <Container>
+        <Rating
+        score={score}
+        />
+      </Container>
       <Title>
-        {props.title}
+        {title}
       </Title>
       <Description>
-        {props.description}
+        {description}
       </Description>
-      <div className="review-rating">
-        {props.score}
-      </div>
+    
     </Card>
   )
 }
