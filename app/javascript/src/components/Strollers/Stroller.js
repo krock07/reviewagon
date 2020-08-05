@@ -15,8 +15,8 @@ const StrollerLogo = styled.div`
   img {
     height: 250px;
     width: 250px;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 100%;
+    // border: 1px solid rgba(0,0,0,0.1);
+    // border-radius: 100%;
   }
 `
 
@@ -48,6 +48,11 @@ const LinkWrapper = styled.div`
       background: #4c4944;
     }
   }
+` 
+const Center = styled.div` 
+display: flex;
+justify-content: center;
+align-items: center;
 `
 
 
@@ -57,10 +62,10 @@ const Stroller = (props) => {
     // const avg_score = parseFloat(props.avg_score / 100)
 
   return (
-    <Card>
-      <StrollerLogo>
+    <div className="column is-one-third">
+      <Center>
         <img src={props.image_url} alt={props.name} width="250" />
-      </StrollerLogo>
+      </Center>
       <StrollerName>
         {props.name}
       </StrollerName>
@@ -68,7 +73,7 @@ const Stroller = (props) => {
       <LinkWrapper>
         <Link to={"/strollers/" + props.slug}>View Stroller</Link>
       </LinkWrapper>
-    </Card>
+    </div>
   )
 }
 

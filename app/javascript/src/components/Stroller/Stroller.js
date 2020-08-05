@@ -92,6 +92,21 @@ const Stroller = (props) => {
     .catch(resp => {})
 }
 
+ // Destroy a review
+ const handleDestroy = (id, event) => {
+  event.preventDefault()
+  const review_id = review_id
+  axios.post(`http://localhost:3000/api/v1/reviews/${id}.json`, {review, id})
+  .then( (data) => {
+    let reviews = [...stroller.reviews]
+    const index = reviews.findIndex( (data) => data.id == id )
+    reviews.splice(index, 1)
+
+    setStroller({ ...stroller, reviews })
+  })
+  .catch( data => console.log('Error', data) )
+}
+
 
 
 const setRating  = (score, event) => {
@@ -133,6 +148,7 @@ const setRating  = (score, event) => {
         <Review 
           key={index} 
           attributes={review.attributes}
+          handleDestroy={handleDestroy}
           // title={review.attributes.title} 
           // description={review.attributes.description} 
           // score={review.attributes.score} 

@@ -4,12 +4,21 @@ import axios from 'axios';
 import Stroller from './Stroller';
 import styled from 'styled-components';
 import Header from './Header'
+import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 const Home = styled.div`
     text-align:center;
     margin-left: auto;
     margin-right: auto;
     max-width: 1200px;
+`
+
+const Hero = styled.div`
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    background: url("https://www.newyorkfamily.com/wp-content/uploads/2020/01/babies-in-strollers-1200x801.jpg") no-repeat center;
+    background-size: cover;
 `
 
 const Grid = styled.div`
@@ -78,10 +87,11 @@ const Strollers = () => {
 
   return (
     <Home>
+      <Hero/>
       <Header/>
-      <Grid>
+      <div className="columns is-multiline">
         {grid}
-      </Grid>
+      </div>
     </Home>
   );
 };

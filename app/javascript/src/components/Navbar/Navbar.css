@@ -1,0 +1,26 @@
+.toolbar {
+    /* position: fixed; */
+    width: 100%;
+    background: black;
+    height: 75px;
+    top:0;
+    left:0;
+}
+
+.toolbar_nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1rem;
+}
+
+.toolbar_navitems li {
+    color: white;
+    text-decoration: none;
+}
+
+.toolbar_navitems li:hover,
+.toolbar_navitems li:active {
+    columns: #ffc114;
+}
+

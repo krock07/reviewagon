@@ -23,6 +23,26 @@ const Container =styled.div`
   flex-direction: row:
 `
 
+const Options = styled.div`
+position:absolute;
+right :15px;
+top: 15px;
+display: flex;
+flex-direction: columns;
+`
+
+
+const Icon = styled.button`
+  box-shadow: none;
+  border-radius: 4px;
+  margin: 0 4px;
+  cursor: pointer;
+
+  i {
+    font-size: 18px;
+  }
+`
+
 const Review = (props) => {
   const {score, description, title} = props.attributes
   return (
@@ -38,6 +58,11 @@ const Review = (props) => {
       <Description>
         {description}
       </Description>
+      <div>
+        {/* <h1 onClick={props.handleDestroy.bind(this, props.id)}>DELETE</h1> */}
+        <Icon onClick={props.handleDestroy.bind(this, props.id)}> <i className="fa fa-trash"></i></Icon>
+        <Icon> <i className="fa fa-pencil"></i></Icon>
+      </div>
     
     </Card>
   )
