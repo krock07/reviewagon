@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
     review = Review.find(params[:id])
 
     if review.update(review_params)
-      render json: StrollerSerializer.new(review, options).serialized_json
+      render json: StrollerSerializer.new(review).serialized_json
     else
       render json: stroller.errors, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1
   # DELETE /reviews/1.json
   def destroy
-    # review = current_user.reviews.find(params[:id])
+   
     review = Review.find(params[:id])
 
     if review.destroy

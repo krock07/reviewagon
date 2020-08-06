@@ -45,6 +45,7 @@ const Icon = styled.button`
 
 const Review = (props) => {
   const {score, description, title} = props.attributes
+  console.log(props.review)
   return (
     <Card>
       <Container>
@@ -60,8 +61,8 @@ const Review = (props) => {
       </Description>
       <div>
         {/* <h1 onClick={props.handleDestroy.bind(this, props.id)}>DELETE</h1> */}
-        <Icon onClick={props.handleDestroy.bind(this, props.id)}> <i className="fa fa-trash"></i></Icon>
-        <Icon> <i className="fa fa-pencil"></i></Icon>
+        <Icon onClick={props.handleDestroy.bind(this, props.review.id)}> <i className="fa fa-trash"></i></Icon>
+        <Icon onClick={props.handleUpdate.bind(this, props.review.id)}> <i className="fa fa-pencil"></i></Icon>
       </div>
     
     </Card>

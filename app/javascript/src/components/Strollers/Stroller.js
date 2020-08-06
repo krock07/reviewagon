@@ -64,7 +64,7 @@ const Stroller = (props) => {
   return (
     <div className="column is-one-third">
       <Center>
-        <img src={props.image_url} alt={props.name} width="250" />
+        <StrollerLogo><img src={props.image_url} alt={props.name} width="250" height="250" /></StrollerLogo>
       </Center>
       <StrollerName>
         {props.name}

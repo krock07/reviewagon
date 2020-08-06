@@ -92,20 +92,52 @@ const Stroller = (props) => {
     .catch(resp => {})
 }
 
+const resetStroller = () => {
+  const slug = props.match.params.slug
+
+        axios.get(`http://localhost:3000/api/v1/strollers/${slug}.json`)
+        .then(response => {
+          setStroller(response.data)
+          setLoaded(true)
+        } )
+        .catch( resp => console.log(resp) )
+}
+
+
  // Destroy a review
  const handleDestroy = (id, event) => {
   event.preventDefault()
-  const review_id = review_id
-  axios.post(`http://localhost:3000/api/v1/reviews/${id}.json`, {review, id})
-  .then( (data) => {
-    let reviews = [...stroller.reviews]
-    const index = reviews.findIndex( (data) => data.id == id )
-    reviews.splice(index, 1)
+  let review_id = review_id
+  axios.delete(`http://localhost:3000/api/v1/reviews/${id}`, {review, id})
+  // .then( resp => {console.log(resp)
+  //   return resp
+  // })
+  .then( (resp) => {
+    // let reviews = [...stroller.reviews]
+    // const index = reviews.findIndex( (data) => data.id == id )
+    // reviews.splice(index, 1)
 
-    setStroller({ ...stroller, reviews })
+    // setStroller(stroller)
+    resetStroller();
   })
   .catch( data => console.log('Error', data) )
 }
+
+// update a review
+
+const handleUpdate = (id, event) => {
+  event.preventDefault()
+  axios.put(`http://localhost:3000/api/v1/reviews/${id}`, {
+  })
+  .then(response => {
+    console.log(response);
+  })
+  .catch(error => {
+    console.log(err);
+  });
+
+}
+  
 
 
 
@@ -149,6 +181,8 @@ const setRating  = (score, event) => {
           key={index} 
           attributes={review.attributes}
           handleDestroy={handleDestroy}
+          review={review}
+          handleUpdate={handleUpdate}
           // title={review.attributes.title} 
           // description={review.attributes.description} 
           // score={review.attributes.score} 
