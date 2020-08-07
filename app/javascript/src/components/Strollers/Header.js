@@ -11,6 +11,7 @@ const H1 = styled.p`
 const Subheader = styled.p`
   font-weight:300;
   font-size:26px;
+  padding: 20px;
 `
 
 const Header = () => {
@@ -18,7 +19,7 @@ const Header = () => {
       
         <Wrapper>
             <H1>Reviewagon</H1>
-            <Subheader>sub header goes here</Subheader>
+            <Subheader>Your safe place in an unsafe world. Share your experience</Subheader>
         </Wrapper>
       
     );

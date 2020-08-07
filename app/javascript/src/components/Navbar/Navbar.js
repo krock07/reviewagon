@@ -180,6 +180,7 @@ const Navbar = (props) => {
           <Navitems>
             <List><Link to="/">Home</Link></List>
             <List><Link to="/login">Login</Link></List>
+            <List><Link to="/register">Signup</Link></List>
           </Navitems>
         </div>
       </Toolbar_nav>
