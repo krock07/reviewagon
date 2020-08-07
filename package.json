@@ -1,4 +1,8 @@
 {
+  "engines": {
+    "node": "12.16.0", 
+    "npm": "6.13.4"
+  },
   "name": "review_wagon_app",
   "private": true,
   "dependencies": {
