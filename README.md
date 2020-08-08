@@ -63,7 +63,7 @@ My handleUpdate only works in Postman and not in the frontend
 
 #### App Screenshot:
 
---- ![App Screenshot](https://github.com/krock07/reviewagon/blob/master/app/javascript/src/images/AppScreenShot.png?raw=true
+--- ![App Screenshot](https://github.com/krock07/reviewagon/blob/master/app/javascript/src/images/AppScreenShot.png?raw=true)
 
 #### Wireframe:
 ![wireframe](https://github.com/krock07/reviewagon/blob/master/app/javascript/src/images/wirefram.png?raw=true)
