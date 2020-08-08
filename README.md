@@ -12,6 +12,7 @@ Run rails db:migrate to generate your schema file. Once the models are created i
 
 ## Important links
 https://github.com/rails/webpacker/tree/master/docs
+https://codepen.io/hamzaerbay/pen/xGWgMM
 
 
 
