@@ -58,6 +58,11 @@ DELETE api/v1/reviews#destroy
 Unable to get the my data to deploy to Heroku
 My handleUpdate only works in Postman and not in the frontend
 
+### Future Goals
+- Allow users to add a stroller that not listed on the website
+- Deploy website to heroku or netlify
+- Set user authentication up
+
 
 ## Images
 
