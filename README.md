@@ -17,7 +17,9 @@ https://github.com/rails/webpacker/tree/master/docs
 
 
 ## Planning Story
-The first step I used to build this app was to make a timeline with all the steps I need to complete MVP. For each step I gave an estimate of how muuch time it would take task to complete. After that I added a stretch goal section of things I wanted to accomplish if I had enough time.   
+The first step I used to build this app was to make a timeline with all the steps I need to complete MVP. For each step I gave an estimate of how much time it would take task to complete. After that I added a stretch goal section of things I wanted to accomplish if I had enough time.   
+
+I figured out how many tables I needed and how many columns each table needed. I then established the relationship between the tables. Next, I set up my controllers and routes for the application. Once everything was done in the backend I created my react app. Once that was complete I set up my links using react router. Then I started to build my components starting with the navigation.
 
 
 
@@ -44,7 +46,7 @@ The first step I used to build this app was to make a timeline with all the step
 ### Strollers
 GET    /api/v1/strollers
 POST   /api/v1/strollers
-GET    /api/v1/strollers/:slug (indivisual stroller)
+GET    /api/v1/strollers/:slug (individual stroller)
 ### Reviews
 POST   /api/v1/reviews
 PUT    /api/v1/reviews/:id
@@ -61,9 +63,9 @@ My handleUpdate only works in Postman and not in the frontend
 
 #### App Screenshot:
 
----
+--- ![App Screenshot](https://github.com/krock07/reviewagon/blob/master/app/javascript/src/images/AppScreenShot.png?raw=true
 
 #### Wireframe:
-![picture alt](https://github.com/krock07/reviewagon/blob/master/app/javascript/src/images/wirefram.png?raw=true)
+![wireframe](https://github.com/krock07/reviewagon/blob/master/app/javascript/src/images/wirefram.png?raw=true)
 #### ERD:)
 
