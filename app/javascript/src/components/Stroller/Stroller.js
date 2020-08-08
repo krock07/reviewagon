@@ -103,6 +103,22 @@ const resetStroller = () => {
         .catch( resp => console.log(resp) )
 }
 
+// update a review
+
+const handleUpdate = (id, event) => {
+  event.preventDefault()
+  axios.put(`http://localhost:3000/api/v1/reviews/${id}`, {
+  })
+  .then(response => {
+    setReview(Object.assign({}, review, {[event.target.name]: event.target.value}))
+    console.log(response);
+  })
+  .catch(error => {
+    console.log(err);
+  });
+
+}
+
 
  // Destroy a review
  const handleDestroy = (id, event) => {
@@ -123,20 +139,7 @@ const resetStroller = () => {
   .catch( data => console.log('Error', data) )
 }
 
-// update a review
 
-const handleUpdate = (id, event) => {
-  event.preventDefault()
-  axios.put(`http://localhost:3000/api/v1/reviews/${id}`, {
-  })
-  .then(response => {
-    console.log(response);
-  })
-  .catch(error => {
-    console.log(err);
-  });
-
-}
   
 
 
@@ -214,6 +217,7 @@ const setRating  = (score, event) => {
         setRating={setRating}
         attributes={stroller.data.attributes}
         review={review}
+        
 
         />
       </Column>
