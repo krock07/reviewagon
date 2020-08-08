@@ -64,5 +64,6 @@ My handleUpdate only works in Postman and not in the frontend
 ---
 
 #### Wireframe:
+![picture alt](https://github.com/krock07/reviewagon/blob/master/app/javascript/src/images/wirefram.png?raw=true)
+#### ERD:)
 
-#### ERD:
