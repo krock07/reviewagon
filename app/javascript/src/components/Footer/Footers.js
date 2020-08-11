@@ -1,7 +1,7 @@
 import React from "react";
 // import styled from "styled-components";
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-
+import './realBlack.css'
 // const Footer = styled.div`
 //   display: flex;
 //   flex-flow: row wrap;
@@ -36,9 +36,9 @@ import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 const Footers = () => {
   return (
-    <footer class="footer has-background-black">
+    <footer class="footer has-background-black realBlack">
       <div class="content has-text-centered">
-        <p>
+        <p className= "has-text-light">
           <strong>Reviewagon</strong> by{" "}
           <a href="https://jgthms.com">Khoury Smith</a>. SEIR Mae - We ride together we code together
         </p>

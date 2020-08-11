@@ -10,6 +10,10 @@ const Wrapper = styled.div`
     height: 250px;
     width: 250px;
     margin-bottom: -8px;
+    h1{
+      font-size: 3rem;
+      font-weight: bold;
+    }
   }
 `
 

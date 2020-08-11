@@ -43,7 +43,7 @@ const Strollers = () => {
   const [error, setError] = React.useState('');
 
   useEffect( () => {
-    axios.get('http://localhost:3000/api/v1/strollers.json')
+    axios.get('/api/v1/strollers.json')
     // .then((response) => response.json() )
     .then((response) => response.data)
     .then( resp => {console.log(resp)

@@ -10,7 +10,7 @@ const H1 = styled.p`
 
 const Subheader = styled.p`
   font-weight:300;
-  font-size:26px;
+  font-size:20px;
   padding: 20px;
 `
 

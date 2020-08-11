@@ -45,7 +45,7 @@ const Stroller = (props) => {
         const slug = props.match.params.slug
         // const url = `api/v1/strollers/${slug}.json`
 
-        axios.get(`http://localhost:3000/api/v1/strollers/${slug}.json`)
+        axios.get(`/api/v1/strollers/${slug}.json`)
         .then(response => {
           setStroller(response.data)
           setLoaded(true)
@@ -79,7 +79,7 @@ const Stroller = (props) => {
   
 
     const stroller_id = stroller.data.id
-    axios.post('http://localhost:3000/api/v1/reviews.json', {review, stroller_id})
+    axios.post('/api/v1/reviews.json', {review, stroller_id})
     .then(resp => {
       // debugger
       
@@ -95,7 +95,7 @@ const Stroller = (props) => {
 const resetStroller = () => {
   const slug = props.match.params.slug
 
-        axios.get(`http://localhost:3000/api/v1/strollers/${slug}.json`)
+        axios.get(`/api/v1/strollers/${slug}.json`)
         .then(response => {
           setStroller(response.data)
           setLoaded(true)
@@ -107,7 +107,7 @@ const resetStroller = () => {
 
 const handleUpdate = (id, event) => {
   event.preventDefault()
-  axios.put(`http://localhost:3000/api/v1/reviews/${id}`, {
+  axios.put(`/api/v1/reviews/${id}`, {
   })
   .then(response => {
     setReview(Object.assign({}, review, {[event.target.name]: event.target.value}))
@@ -124,7 +124,7 @@ const handleUpdate = (id, event) => {
  const handleDestroy = (id, event) => {
   event.preventDefault()
   let review_id = review_id
-  axios.delete(`http://localhost:3000/api/v1/reviews/${id}`, {review, id})
+  axios.delete(`/api/v1/reviews/${id}`, {review, id})
   // .then( resp => {console.log(resp)
   //   return resp
   // })
